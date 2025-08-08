@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "47353423881",
+    "project_id": "cursos-musica",
+    "storage_bucket": "cursos-musica.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47353423881:android:8722e91245311de14eb0d8",
+        "android_client_info": {
+          "package_name": "com.exmple.musicos_universal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47353423881-eclucghoi5r6oi65juv1c6fi0simsfmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.exmple.musicos_universal",
+            "certificate_hash": "4af1de4e1481a3ac65406404ce2d4454e21e9a3c"
+          }
+        },
+        {
+          "client_id": "47353423881-akrsr9vdg34e8pqe8csb6s1qgleur8gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAb0TTAvwM77yFaMxdM9cKipCBDEEYjznQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47353423881-akrsr9vdg34e8pqe8csb6s1qgleur8gr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
