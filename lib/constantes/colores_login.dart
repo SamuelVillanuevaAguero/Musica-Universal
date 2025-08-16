@@ -7,8 +7,8 @@ class ClaroLoginColores {
   static const inicioSesionFondo2 = Color.fromARGB(255, 0, 166, 171);
   static const inicioSesionFondo3 = Color.fromARGB(255, 0, 244, 253);*/
 
-  static const inicioSesionFondo1 = Color.fromARGB(255, 60, 216, 255);
-  static const inicioSesionFondo2 = Color.fromARGB(255, 0, 153, 192);
+  static const inicioSesionFondo1 = Colors.blueAccent;
+  static const inicioSesionFondo2 = Colors.blueAccent;
 
   //Letras del Inicio de Sesión
   static const Color letraPrimaria = Colors.white;

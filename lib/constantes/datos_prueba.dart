@@ -2,6 +2,8 @@ import 'package:musicos_universal/modelos/curso.dart';
 import 'package:musicos_universal/modelos/leccion.dart';
 
 class Pruebas {
+
+  static int puntos_total = 200;
   
   static List<Curso> listaCursos(){
     return [

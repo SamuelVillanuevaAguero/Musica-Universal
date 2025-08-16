@@ -10,16 +10,34 @@ class PaginaBase extends StatefulWidget {
 }
 
 class _PaginaBase extends State<PaginaBase> {
-  final PageController _controladorPaginas = PageController();
+  late final PageController _controladorPaginas;
+  late final List<Widget> _paginas;
 
   int _indexActual = 0;
 
-  final List<Widget> _paginas = [
-    PaginaInicio(key: PageStorageKey('PaginaInicio')),
-    PaginaCursos(key: PageStorageKey('PaginaCursos')),
-    PaginaConfiguraciones(key: PageStorageKey('PaginaConfiguraciones')),
-  ];
-  
+  @override
+  void initState() {
+    super.initState();
+
+    //Inicializar el controlador de las página
+    _controladorPaginas = PageController();
+
+    //Inicializar las páginas con clave de almacenamiento
+    _paginas = [
+      PaginaInicio(key: PageStorageKey('PaginaInicio')),
+      PaginaCursos(key: PageStorageKey('PaginaCursos')),
+      PaginaConfiguraciones(key: PageStorageKey('PaginaConfiguraciones')),
+    ];
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    //Destruir el controlador de las páginas cuando el Widget se destruya
+    _controladorPaginas.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

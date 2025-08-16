@@ -3,25 +3,22 @@ import 'package:musicos_universal/modelos/curso.dart';
 import 'package:animate_do/animate_do.dart';
 
 Map<String, Color> _coloresFondo = {
-  'Principiante':Colors.lightGreenAccent,
-  'Intermedio':Colors.yellow,
-  'Avanzado':const Color.fromARGB(255, 255, 206, 143)
+  'Principiante': Colors.lightGreenAccent,
+  'Intermedio': Colors.yellow,
+  'Avanzado': const Color.fromARGB(255, 255, 206, 143),
 };
 
 Map<String, Color> _coloresLetras = {
-  'Principiante':Colors.green,
-  'Intermedio':Colors.orange,
-  'Avanzado':Colors.red
+  'Principiante': Colors.green,
+  'Intermedio': Colors.orange,
+  'Avanzado': Colors.red,
 };
 
 class CursoWidget extends StatelessWidget {
   final VoidCallback onTap;
   final Curso curso;
 
-  const CursoWidget({
-    required this.onTap,
-    required this.curso
-  });
+  const CursoWidget({required this.onTap, required this.curso});
 
   @override
   Widget build(BuildContext context) {
@@ -68,55 +65,63 @@ class CursoWidget extends StatelessWidget {
 
               SizedBox(width: 20),
 
-              Expanded(child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //Espacio
-                  SizedBox(height: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //Espacio
+                    SizedBox(height: 10),
 
-                  //Nivel - Letras
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: _coloresFondo[curso.nivel],
-                    ),
-                    child: Text(
-                      curso.nivel,
-                      style: TextStyle(
-                        color: _coloresLetras[curso.nivel],
-                        fontWeight: FontWeight.bold
+                    //Nivel - Letras
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: _coloresFondo[curso.nivel],
+                      ),
+                      child: Text(
+                        curso.nivel,
+                        style: TextStyle(
+                          color: _coloresLetras[curso.nivel],
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
 
-                  Text(
-                    curso.nombre,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.black.withOpacity(0.6,/*1*/)),
-                    textAlign: TextAlign.left,
-                    softWrap: true,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-
-                  Container(
-                    width: (MediaQuery.of(context).size.width - 200) * (curso.progreso / 100),
-                    height: 10,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 147, 255, 150),
-                      borderRadius: BorderRadius.circular(10)
+                    Text(
+                      curso.nombre,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 13,
+                        color: Colors.black.withOpacity(0.6 /*1*/),
+                      ),
+                      textAlign: TextAlign.left,
+                      softWrap: true,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                  )
-                ],
-              ),)
+
+                    Container(
+                      width:
+                          (MediaQuery.of(context).size.width - 200) *
+                          (curso.progreso / 100),
+                      height: 10,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 147, 255, 150),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
 
-    return (curso.id % 2 == 0)? 
-    FadeInLeft(duration: Duration(milliseconds: 1500), child: widget) : 
-    FadeInRight(duration: Duration(milliseconds: 1500), child: widget);
+    return (curso.id % 2 == 0)
+        ? FadeInLeft(duration: Duration(milliseconds: 1500), child: widget)
+        : FadeInRight(duration: Duration(milliseconds: 1500), child: widget);
   }
 }

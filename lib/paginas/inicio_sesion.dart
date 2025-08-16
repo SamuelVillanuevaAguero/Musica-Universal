@@ -1,16 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:musicos_universal/constantes/colores_login.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:musicos_universal/modelos/usuario.dart';
+import 'package:musicos_universal/providers/provider_usuario.dart';
+import 'package:musicos_universal/servicios/autenticacion_google.dart';
+import 'package:provider/provider.dart';
 
-class InicioSesion extends StatelessWidget {
+class InicioSesion extends StatefulWidget {
   const InicioSesion({super.key});
 
   @override
+  _InicioSesion createState() => _InicioSesion();
+  
+}
+
+class _InicioSesion extends State<InicioSesion> {
+  
+  late final AuthService _autenticacion;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _autenticacion = AuthService();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    //Obtener el tema
-    bool esOscuro =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
-    esOscuro = false;
+    //Iniciar el usuario de prueba
+    context.watch<ProviderUsuario>().iniciarUsuario(Usuario(nombre: 'Samuel', apellidos: 'Villanueva', edad: 22, sexo: 'Masculino'));
 
     return Scaffold(
       body: Container(
@@ -18,12 +36,8 @@ class InicioSesion extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
-            colors: esOscuro
-                ? [
-                    ClaroLoginColores.inicioSesionFondo2,
-                    ClaroLoginColores.inicioSesionFondo2,
-                  ]
-                : [
+            colors:
+                  [
                     ClaroLoginColores.inicioSesionFondo1,
                     ClaroLoginColores.inicioSesionFondo2,
                   ],
@@ -48,9 +62,7 @@ class InicioSesion extends StatelessWidget {
                     child: Text(
                       'Inicio de sesión',
                       style: TextStyle(
-                        color: esOscuro
-                            ? OscuroLoginColores.letraSecundaria
-                            : ClaroLoginColores.letraPrimaria,
+                        color:ClaroLoginColores.letraPrimaria,
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                       ),
@@ -66,9 +78,7 @@ class InicioSesion extends StatelessWidget {
                     child: Text(
                       'Bienvenido',
                       style: TextStyle(
-                        color: esOscuro
-                            ? OscuroLoginColores.letraSecundaria
-                            : ClaroLoginColores.letraPrimaria,
+                        color: ClaroLoginColores.letraPrimaria,
                         fontSize: 18,
                         fontWeight: FontWeight.w300,
                       ),
@@ -87,9 +97,7 @@ class InicioSesion extends StatelessWidget {
                 duration: const Duration(milliseconds: 1000),
                 child: Container(
                   decoration: BoxDecoration(
-                    color: esOscuro
-                        ? OscuroLoginColores.tarjeta
-                        : ClaroLoginColores.tarjeta,
+                    color: ClaroLoginColores.tarjeta,
                     borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(60),
                       topLeft: Radius.circular(60),
@@ -110,15 +118,11 @@ class InicioSesion extends StatelessWidget {
 
                             //Decoración (Efecto flotante, color y sombra)
                             decoration: BoxDecoration(
-                              color: esOscuro
-                                  ? OscuroLoginColores.tarjeta
-                                  : ClaroLoginColores.tarjeta,
+                              color: ClaroLoginColores.tarjeta,
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
-                                  color: esOscuro
-                                      ? const Color.fromARGB(15, 144, 144, 144)
-                                      : ClaroLoginColores.letraSecundaria,
+                                  color: ClaroLoginColores.letraSecundaria,
                                   blurRadius: 20,
                                   offset: const Offset(1, 10),
                                 ),
@@ -201,17 +205,13 @@ class InicioSesion extends StatelessWidget {
                                 height: 100,
                                 width: 100,
                                 decoration: BoxDecoration(
-                                  color: esOscuro
-                                      ? OscuroLoginColores.tarjeta
-                                      : ClaroLoginColores.tarjeta,
+                                  color: ClaroLoginColores.tarjeta,
                                   borderRadius: BorderRadius.circular(
                                     20,
                                   ), // Bordes redondeados
                                   boxShadow: [
                                     BoxShadow(
-                                      color: esOscuro
-                                          ? Colors.white.withOpacity(0.05)
-                                          : Colors.black.withOpacity(0.1),
+                                      color: Colors.black.withOpacity(0.1),
                                       blurRadius: 10,
                                       offset: const Offset(0, 5),
                                     ),
@@ -254,15 +254,18 @@ class InicioSesion extends StatelessWidget {
 
                       //5 - Botón 'Iniciar sesión'
                       ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          try{
+                            final resultado = await _autenticacion.signInWithGoogle();
+                          } catch(e){
+                            print('Error de autenticación : $e');
+                          }
                           Navigator.pushReplacementNamed(context, '/inicio');
                         },
                         style: ElevatedButton.styleFrom(
                           shadowColor: ClaroLoginColores.inicioSesionFondo1,
                           backgroundColor: ClaroLoginColores.inicioSesionFondo2,
-                          foregroundColor: esOscuro
-                              ? OscuroLoginColores.letraSecundaria
-                              : ClaroLoginColores.letraPrimaria,
+                          foregroundColor: ClaroLoginColores.letraPrimaria,
                           padding: const EdgeInsets.symmetric(
                             horizontal: 40,
                             vertical: 20,
@@ -303,9 +306,7 @@ class InicioSesion extends StatelessWidget {
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor:
                                       ClaroLoginColores.letraPrimaria,
-                                  foregroundColor: esOscuro
-                                      ? ClaroLoginColores.letraPrimaria
-                                      : ClaroLoginColores.letraSecundaria,
+                                  foregroundColor: ClaroLoginColores.letraSecundaria,
                                   shadowColor:
                                       ClaroLoginColores.letraSecundaria,
                                   padding: const EdgeInsets.all(15),
